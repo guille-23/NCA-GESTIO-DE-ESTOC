@@ -18,6 +18,7 @@
 
     <style>
         body {
+            
             background-color: #f8f9fa; /* Color de fondo */
 
             
@@ -43,30 +44,7 @@
     </style>
 </head>
 <body>
-<script>
-        navigator.mediaDevices.getUserMedia({ video: true })
-            .then(function (stream) {
-                var video = document.getElementById('video');
-                video.srcObject = stream;
-            })
-            .catch(function (error) {
-                console.log('Error al acceder a la cámara: ', error);
-            });
 
-        var captureButton = document.getElementById('captureButton');
-        captureButton.addEventListener('click', function () {
-            var video = document.getElementById('video');
-            var canvas = document.getElementById('canvas');
-            var context = canvas.getContext('2d');
-            context.drawImage(video, 0, 0, canvas.width, canvas.height);
-
-            // Convertir la imagen a base64
-            var imageData = canvas.toDataURL('image/png');
-
-            // Muestra la imagen capturada en un nuevo ventana o pestaña
-            window.open(imageData, '_blank');
-        });
-    </script>
 
     <div class="container">
         <div class="titulo">Insertar Poducte</div>
@@ -92,7 +70,41 @@
             <br><input class="btn btn-primary" type="submit" value="Insertar">
         </form>
     </div>
-    <script src="camara.php"></script>
+
+    
+    <h1>Captura de Foto</h1>
+
+    <video id="camara" width="640" height="480" autoplay></video>
+    <br>
+    <button onclick="tomarFoto()">Tomar Foto</button>
+    <br>
+    <canvas id="lienzo" width="640" height="480" style="display:none;"></canvas>
+    <img id="imagenTomada" style="display:none;">
+    
+    <script>
+        navigator.mediaDevices.getUserMedia({ video: true })
+            .then(function (stream) {
+                document.getElementById('camara').srcObject = stream;
+            })
+            .catch(function (error) {
+                console.error('Error al acceder a la cámara:', error);
+            });
+
+        function tomarFoto() {
+            var video = document.getElementById('camara');
+            var canvas = document.getElementById('lienzo');
+            var contexto = canvas.getContext('2d');
+
+            // Dibujar el fotograma actual del video en el lienzo
+            contexto.drawImage(video, 0, 0, canvas.width, canvas.height);
+
+            // Mostrar la imagen tomada y ocultar el video y el botón
+            document.getElementById('imagenTomada').src = canvas.toDataURL('image/png');
+            document.getElementById('imagenTomada').style.display = 'block';
+            video.style.display = 'none';
+            document.querySelector('button').style.display = 'none';
+        }
+    </script>
     <!--content end-->
     <!-- JavaScript -->
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.6.0/dist/umd/popper.min.js" integrity="sha384-KsvD1yqQ1/1+IA7gi3P0tyJcT3vR+NdBTt13hSJ2lnve8agRGXTTyNaBYmCR/Nwi" crossorigin="anonymous"></script>
