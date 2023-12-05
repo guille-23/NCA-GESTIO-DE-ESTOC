@@ -45,7 +45,6 @@
 </head>
 <body>
 
-
     <div class="container">
         <div class="titulo">Insertar Poducte</div>
         <form class="form-control" action="index.php?controller=producte&action=crear" method="post">
