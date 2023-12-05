@@ -18,7 +18,6 @@
 
     <style>
         body {
-            
             background-color: #f8f9fa; /* Color de fondo */
 
             
@@ -44,6 +43,45 @@
     </style>
 </head>
 <body>
+<h2>Captura de Foto</h2>
+
+    <video id="video" width="640" height="480" autoplay></video>
+    <br>
+    <button id="captureButton">Capturar Foto</button>
+    <canvas id="canvas" width="640" height="480"></canvas>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+    var video = document.getElementById('video');
+    var canvas = document.getElementById('canvas');
+    var captureButton = document.getElementById('captureButton');
+
+    navigator.mediaDevices.getUserMedia({ video: true })
+        .then(function (stream) {
+            video.srcObject = stream;
+        })
+        .catch(function (error) {
+            console.error('Error al activar la cámara:', error);
+        });
+
+    captureButton.addEventListener('click', function () {
+        var context = canvas.getContext('2d');
+        context.drawImage(video, 0, 0, canvas.width, canvas.height);
+
+        // Aquí puedes enviar la imagen capturada al servidor mediante una solicitud AJAX
+        fetch('upload.php', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded',
+            },
+            body: 'data=' + encodeURIComponent(canvas.toDataURL('image/png'))
+        })
+        .then(response => response.json())
+        .then(data => console.log(data))
+        .catch(error => console.error('Error al enviar la imagen:', error));
+    });
+});
+    </script>
 
     <div class="container">
         <div class="titulo">Insertar Poducte</div>
@@ -69,41 +107,7 @@
             <br><input class="btn btn-primary" type="submit" value="Insertar">
         </form>
     </div>
-
-    
-    <h1>Captura de Foto</h1>
-
-    <video id="camara" width="640" height="480" autoplay></video>
-    <br>
-    <button onclick="tomarFoto()">Tomar Foto</button>
-    <br>
-    <canvas id="lienzo" width="640" height="480" style="display:none;"></canvas>
-    <img id="imagenTomada" style="display:none;">
-    
-    <script>
-        navigator.mediaDevices.getUserMedia({ video: true })
-            .then(function (stream) {
-                document.getElementById('camara').srcObject = stream;
-            })
-            .catch(function (error) {
-                console.error('Error al acceder a la cámara:', error);
-            });
-
-        function tomarFoto() {
-            var video = document.getElementById('camara');
-            var canvas = document.getElementById('lienzo');
-            var contexto = canvas.getContext('2d');
-
-            // Dibujar el fotograma actual del video en el lienzo
-            contexto.drawImage(video, 0, 0, canvas.width, canvas.height);
-
-            // Mostrar la imagen tomada y ocultar el video y el botón
-            document.getElementById('imagenTomada').src = canvas.toDataURL('image/png');
-            document.getElementById('imagenTomada').style.display = 'block';
-            video.style.display = 'none';
-            document.querySelector('button').style.display = 'none';
-        }
-    </script>
+    <script src="camara.php"></script>
     <!--content end-->
     <!-- JavaScript -->
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.6.0/dist/umd/popper.min.js" integrity="sha384-KsvD1yqQ1/1+IA7gi3P0tyJcT3vR+NdBTt13hSJ2lnve8agRGXTTyNaBYmCR/Nwi" crossorigin="anonymous"></script>
