@@ -47,13 +47,54 @@
                     <li class="nav-item">
                         <a class="nav-link active" aria-current="page" href="index.php?controller=producte&action=mostrartot">Productes</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="index.php?controller=nota&action=mostrartot">Notes</a>
-                    </li>
+                    
                 </ul>
             </div>
         </div>
     </nav>
+
+
+    
+    <video id="video" width="640" height="480" autoplay></video>
+    <button id="captureButton">Capturar Foto</button>
+    <canvas id="canvas" width="640" height="480" style="display:none;"></canvas>
+
+    <script>
+        // Obtener acceso a la cámara
+        navigator.mediaDevices.getUserMedia({ video: true })
+            .then(function (stream) {
+                var video = document.getElementById('video');
+                video.srcObject = stream;
+            })
+            .catch(function (error) {
+                console.log('Error al acceder a la cámara: ', error);
+            });
+
+        // Capturar y enviar la foto al servidor PHP
+        var captureButton = document.getElementById('captureButton');
+        captureButton.addEventListener('click', function () {
+            var video = document.getElementById('video');
+            var canvas = document.getElementById('canvas');
+            var context = canvas.getContext('2d');
+            context.drawImage(video, 0, 0, canvas.width, canvas.height);
+
+            // Convertir la imagen a base64
+            var imageData = canvas.toDataURL('image/png');
+
+            // Enviar la imagen al servidor PHP
+            var xhr = new XMLHttpRequest();
+            xhr.open('POST', 'save_photo.php', true);
+            xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState == 4 && xhr.status == 200) {
+                    console.log('Foto guardada con éxito.');
+                }
+            };
+            xhr.send('image=' + encodeURIComponent(imageData));
+        });
+    </script>
+
+  
 
     <?php
 
