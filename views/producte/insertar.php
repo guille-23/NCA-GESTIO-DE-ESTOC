@@ -41,6 +41,68 @@
     </style>
 </head>
 <body>
+
+
+<div class="container">
+        <div class="titulo">Insertar Producto</div>
+        <form class="form-control" action="index.php?controller=producte&action=crear" method="post">
+            <!-- ... (tus campos de entrada actuales) ... -->
+            
+            <!-- Nuevo botón para tomar la foto -->
+            <button type="button" class="btn btn-primary" id="tomarFoto">Tomar Foto</button>
+
+            <!-- ... (tus campos de entrada actuales) ... -->
+        </form>
+    </div>
+
+    <!-- ... (tu código actual) ... -->
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            // Obtener referencia al botón y agregar un evento de clic
+            const tomarFotoBtn = document.getElementById("tomarFoto");
+            tomarFotoBtn.addEventListener("click", function () {
+                // Obtener el acceso a la cámara
+                navigator.mediaDevices.getUserMedia({ video: true })
+                    .then(function (stream) {
+                        // Mostrar la vista previa de la cámara en un elemento de video
+                        const video = document.createElement("video");
+                        video.srcObject = stream;
+                        video.play();
+
+                        // Esperar a que el usuario haga clic en el botón para capturar la foto
+                        tomarFotoBtn.addEventListener("click", function () {
+                            // Crear un lienzo (canvas) y dibujar la imagen de la cámara en él
+                            const canvas = document.createElement("canvas");
+                            canvas.width = video.videoWidth;
+                            canvas.height = video.videoHeight;
+                            const context = canvas.getContext("2d");
+                            context.drawImage(video, 0, 0, canvas.width, canvas.height);
+
+                            // Convertir el lienzo a una URL de datos (data URL) y asignarla a un campo oculto
+                            const dataURL = canvas.toDataURL("image/png");
+                            const inputFoto = document.createElement("input");
+                            inputFoto.type = "hidden";
+                            inputFoto.name = "foto"; // Nombre del campo en el formulario
+                            inputFoto.value = dataURL;
+                            document.forms[0].appendChild(inputFoto);
+
+                            // Detener la transmisión de la cámara y quitar el elemento de video
+                            stream.getVideoTracks()[0].stop();
+                            video.remove();
+                        });
+                    })
+                    .catch(function (error) {
+                        console.error("Error al acceder a la cámara:", error);
+                    });
+            });
+        });
+    </script>
+
+    <!-- ... (tu código actual) ... -->
+
+
+
     <div class="container">
         <div class="titulo">Insertar Poducte</div>
         <form class="form-control" action="index.php?controller=producte&action=crear" method="post">

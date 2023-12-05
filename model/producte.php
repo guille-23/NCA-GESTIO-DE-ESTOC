@@ -135,11 +135,24 @@ require_once "config/database.php";
             return $result;
         }*/
         public function mostrarPoducte(){
-            $connexio = database::connectar();
-            $sql = "SELECT * FROM productes WHERE Nom_del_producte = {$this->Nom_del_producte};";
-            $result = mysqli_query($connexio, $sql);
-            return $result->fetch_assoc();
-        }
+                $connexio = database::connectar();
+                $sql = "SELECT * FROM productes WHERE Nom_del_producte = ?";
+                
+                $stmt = mysqli_prepare($connexio, $sql);
+                mysqli_stmt_bind_param($stmt, "s", $this->Nom_del_producte);
+                mysqli_stmt_execute($stmt);
+            
+                $result = mysqli_stmt_get_result($stmt);
+            
+                if ($result && $row = mysqli_fetch_assoc($result)) {
+                    return $row;
+                } else {
+                    // Manejo de errores
+                    echo "Error al obtener el producto: " . mysqli_error($connexio);
+                    return false;
+                }
+            }
+            
 
         
 
