@@ -37,7 +37,7 @@
             echo "<td>" . $row["Aula"] . "</td>";
             echo "<td>" . $row["Armari"] . "</td>";
             echo "<td>" . $row["Data_registre"] . "</td>";
-            echo "<td><img src='" . $row["Foto"] . "' width='100' height='100'></td>";
+            echo "<td><img src='image/" . $row["Foto"] . "' width='100' height='100'></td>";
 
             echo '<td><a class="btn btn-warning" href="index.php?controller=producte&action=actualitzar&mostrarPoducte_id=' . $row["Nom_del_producte"] . '" role="button">Actualizar</a></td>';
             echo '<td><a class="btn btn-danger" href="index.php?controller=producte&action=EsborrarUsuari&mostrarPoducte_id=' . $row["Nom_del_producte"] . '" role="button">Eliminar</a></td>';
