@@ -7,7 +7,10 @@ require_once "config/database.php";
         public $Aula;
         public $Armari;
         public $Data_registre;
+        public $Foto;
 
+
+       
         /**
          * Get the value of Nom_del_producte
          */ 
@@ -107,7 +110,22 @@ require_once "config/database.php";
 
                 return $this;
         }
-      
+        public function getFoto()
+        {
+                return $this->Foto;
+        }
+
+        /**
+         * Set the value of Cuantitat
+         *
+         * @return  self
+         */ 
+        public function setFoto($Foto)
+        {
+                $this->Foto = $Foto;
+
+                return $this;
+        }
     
         public function mostrar(){
             $connexio = database::connectar();
@@ -117,14 +135,14 @@ require_once "config/database.php";
         }
         public function insertar(){
             $connexio = database::connectar();
-            $sql = "INSERT INTO productes (Nom_del_producte, Cuantitat, Aula, Armari, Data_registre) VALUES ('$this->Nom_del_producte', '$this->Cuantitat', '$this->Aula', '$this->Armari', '$this->Data_registre')";
+            $sql = "INSERT INTO productes (Nom_del_producte, Cuantitat, Aula, Armari, Data_registre, Foto) VALUES ('$this->Nom_del_producte', '$this->Cuantitat', '$this->Aula', '$this->Armari', '$this->Data_registre','$this->Foto')";
             $result = mysqli_query($connexio, $sql);
             return $result;
             
         }
         public function modificar(){
             $connexio = database::connectar();
-            $sql = "UPDATE productes SET Nom_del_producte = '$this->Nom_del_producte', Cuantitat = '$this->Cuantitat', Aula = '$this->Aula', Armari = '$this->Armari', Data_registre = '$this->Data_registre' WHERE Nom_del_producte = '$this->Nom_del_producte'";
+            $sql = "UPDATE productes SET Nom_del_producte = '$this->Nom_del_producte', Cuantitat = '$this->Cuantitat', Aula = '$this->Aula', Armari = '$this->Armari', Data_registre = '$this->Data_registre', Foto = '$this->Foto' WHERE Nom_del_producte = '$this->Nom_del_producte'";
             $result = mysqli_query($connexio, $sql);
             return $result;
         }

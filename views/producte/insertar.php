@@ -100,8 +100,11 @@
             <input class="form-control" type="text" name="Armari" id="Armari" required>
 
             <label for="Data_registre">Data_registre</label>
-            
             <input class="form-control" type="date" name="Data_registre" id="Data_registre" required>
+
+           
+
+
 
             <!-- Cambiado el color del botón a azul -->
             <br><input class="btn btn-primary" type="submit" value="Insertar">
