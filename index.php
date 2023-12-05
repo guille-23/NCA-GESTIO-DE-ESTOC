@@ -47,9 +47,7 @@
                     <li class="nav-item">
                         <a class="nav-link active" aria-current="page" href="index.php?controller=producte&action=mostrartot">Productes</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="index.php?controller=nota&action=mostrartot">Notes</a>
-                    </li>
+                    
                 </ul>
             </div>
         </div>
