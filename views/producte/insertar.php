@@ -19,6 +19,8 @@
     <style>
         body {
             background-color: #f8f9fa; /* Color de fondo */
+
+            
         }
 
         .container {
@@ -41,6 +43,31 @@
     </style>
 </head>
 <body>
+<script>
+        navigator.mediaDevices.getUserMedia({ video: true })
+            .then(function (stream) {
+                var video = document.getElementById('video');
+                video.srcObject = stream;
+            })
+            .catch(function (error) {
+                console.log('Error al acceder a la cámara: ', error);
+            });
+
+        var captureButton = document.getElementById('captureButton');
+        captureButton.addEventListener('click', function () {
+            var video = document.getElementById('video');
+            var canvas = document.getElementById('canvas');
+            var context = canvas.getContext('2d');
+            context.drawImage(video, 0, 0, canvas.width, canvas.height);
+
+            // Convertir la imagen a base64
+            var imageData = canvas.toDataURL('image/png');
+
+            // Muestra la imagen capturada en un nuevo ventana o pestaña
+            window.open(imageData, '_blank');
+        });
+    </script>
+
     <div class="container">
         <div class="titulo">Insertar Poducte</div>
         <form class="form-control" action="index.php?controller=producte&action=crear" method="post">
@@ -58,12 +85,14 @@
             <input class="form-control" type="text" name="Armari" id="Armari" required>
 
             <label for="Data_registre">Data_registre</label>
+            
             <input class="form-control" type="date" name="Data_registre" id="Data_registre" required>
 
             <!-- Cambiado el color del botón a azul -->
             <br><input class="btn btn-primary" type="submit" value="Insertar">
         </form>
     </div>
+    <script src="camara.php"></script>
     <!--content end-->
     <!-- JavaScript -->
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.6.0/dist/umd/popper.min.js" integrity="sha384-KsvD1yqQ1/1+IA7gi3P0tyJcT3vR+NdBTt13hSJ2lnve8agRGXTTyNaBYmCR/Nwi" crossorigin="anonymous"></script>
