@@ -122,24 +122,24 @@ require_once "config/database.php";
             return $result;
             
         }
-        /*public function modificar(){
+        public function modificar(){
             $connexio = database::connectar();
-            $sql = "UPDATE usuaris SET nom = '$this->nom', cognom = '$this->cognom', email = '$this->correu', password = '$this->contrasenya', data = '$this->data' WHERE id = '$this->id'";
+            $sql = "UPDATE productes SET Nom_del_producte = '$this->Nom_del_producte', Cuantitat = '$this->Cuantitat', Aula = '$this->Aula', Armari = '$this->Armari', Data_registre = '$this->Data_registre' WHERE Nom_del_producte = '$this->Nom_del_producte'";
             $result = mysqli_query($connexio, $sql);
             return $result;
         }
-        public function eliminar(){
+        /*public function eliminar(){
             $connexio = database::connectar();
             $sql = "DELETE FROM usuaris WHERE id = {$this->id};";
             $result = mysqli_query($connexio, $sql);
             return $result;
-        }
-        public function mostrarUsuari(){
+        }*/
+        public function mostrarPoducte(){
             $connexio = database::connectar();
-            $sql = "SELECT * FROM usuaris WHERE id = {$this->id};";
+            $sql = "SELECT * FROM productes WHERE Nom_del_producte = {$this->Nom_del_producte};";
             $result = mysqli_query($connexio, $sql);
             return $result->fetch_assoc();
-        }*/
+        }
 
         
 
