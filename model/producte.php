@@ -4,6 +4,7 @@ require_once "config/database.php";
     class producte{   
         public $Nom_del_producte;
         public $Cuantitat;
+        public $Aula;
         public $Armari;
         public $Data_registre;
 
@@ -86,6 +87,26 @@ require_once "config/database.php";
 
                 return $this;
         }
+        
+        /**
+         * Get the value of Aula
+         */ 
+        public function getAula()
+        {
+                return $this->Aula;
+        }
+
+        /**
+         * Set the value of Aula
+         *
+         * @return  self
+         */ 
+        public function setAula($Aula)
+        {
+                $this->Aula = $Aula;
+
+                return $this;
+        }
       
     
         public function mostrar(){
@@ -94,14 +115,14 @@ require_once "config/database.php";
             $result = mysqli_query($connexio, $sql);
             return $result;
         }
-        /*public function insertar(){
+        public function insertar(){
             $connexio = database::connectar();
-            $sql = "INSERT INTO usuaris (nom, cognom, email, password, data) VALUES ('$this->nom', '$this->cognom', '$this->correu', '$this->contrasenya', '$this->data')";
+            $sql = "INSERT INTO productes (Nom_del_producte, Cuantitat, Aula, Armari, Data_registre) VALUES ('$this->Nom_del_producte', '$this->Cuantitat', '$this->Aula', '$this->Armari', '$this->Data_registre')";
             $result = mysqli_query($connexio, $sql);
             return $result;
             
         }
-        public function modificar(){
+        /*public function modificar(){
             $connexio = database::connectar();
             $sql = "UPDATE usuaris SET nom = '$this->nom', cognom = '$this->cognom', email = '$this->correu', password = '$this->contrasenya', data = '$this->data' WHERE id = '$this->id'";
             $result = mysqli_query($connexio, $sql);
@@ -121,5 +142,6 @@ require_once "config/database.php";
         }*/
 
         
+
     }
     ?>
