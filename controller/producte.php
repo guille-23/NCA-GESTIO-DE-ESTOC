@@ -27,6 +27,8 @@ class producteController {
         $producte->setAula($_POST["Aula"]);
         $producte->setArmari($_POST["Armari"]);
         $producte->setData_registre($_POST["Data_registre"]);
+        $producte->setFoto($_POST["Foto"]);
+
         $producte->insertar();
         header("Location:index.php?controller=producte&action=mostrartot");
     }
@@ -39,6 +41,7 @@ class producteController {
         $producte->setAula($_POST["Aula"]);
         $producte->setArmari($_POST["Armari"]);
         $producte->setData_registre($_POST["Data_registre"]);
+        $producte->setFoto($_POST["Foto"]);
         $producte->modificar();
         header("Location:index.php?controller=producte&action=mostrartot");
     }
