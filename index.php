@@ -36,7 +36,6 @@
         }
     </style>
 </head>
-
 <body>
     <!--content start-->
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
