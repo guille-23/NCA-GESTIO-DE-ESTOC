@@ -158,7 +158,5 @@ require_once "config/database.php";
             return $result->fetch_assoc();
         }
 
-        
-
     }
     ?>

@@ -47,6 +47,8 @@
     <video id="video" width="640" height="480" autoplay></video>
     <br>
     <button id="captureButton">Capturar Foto</button>
+    <button id="uploadButton">Subir Foto</button>
+
     <canvas id="canvas" width="640" height="480"></canvas>
 
     <script>
@@ -54,6 +56,7 @@
     var video = document.getElementById('video');
     var canvas = document.getElementById('canvas');
     var captureButton = document.getElementById('captureButton');
+    var uploadButton = document.getElementById('uploadButton');
 
     navigator.mediaDevices.getUserMedia({ video: true })
         .then(function (stream) {
@@ -68,6 +71,9 @@
         context.drawImage(video, 0, 0, canvas.width, canvas.height);
 
         // Aquí puedes enviar la imagen capturada al servidor mediante una solicitud AJAX
+        
+    });
+    uploadButton.addEventListener('click', function () {
         fetch('upload.php', {
             method: 'POST',
             headers: {
@@ -80,7 +86,7 @@
         .catch(error => console.error('Error al enviar la imagen:', error));
     });
 });
-    </script>
+    </script> 
 
     <div class="container">
         <div class="titulo">Insertar Poducte</div>
@@ -102,7 +108,10 @@
             <input class="form-control" type="date" name="Data_registre" id="Data_registre" required>
 
             <label for="Foto">Foto</label>
-            <input class="form-control" type="text" name="Foto" id="Foto" value=$nombre_archivo  required>
+            <input  name="Foto" id="Foto" value=$nombre_archivo  required>
+
+
+            
 
             <!-- Cambiado el color del botón a azul -->
             <br><input class="btn btn-primary" type="submit" value="Insertar">
