@@ -52,11 +52,54 @@
         }
         ?>
         </tbody>
+        <tfoot>
+    <tr>
+        <th>Nom_del_producte</th>
+        <th>Cuantitat</th>
+        <th>Aula</th>
+        <th>Armari</th>
+        <th>Data_registre</th>
+        <th>Foto</th>
+        <th>Actualizar</th>
+        <th>Esborrar</th>
+
+    </tr>
+        </tfoot>
     </table>
     <script>
-        $(document).ready( function () {
-    $('#myTable').DataTable();
-} );
+new DataTable('#myTable', {
+    initComplete: function () {
+        this.api()
+            .columns()
+            .every(function () {
+                let column = this;
+ 
+                // Create select element
+                let select = document.createElement('select');
+                select.add(new Option(''));
+                column.footer().replaceChildren(select);
+ 
+                // Apply listener for user change in value
+                select.addEventListener('change', function () {
+                    var val = DataTable.util.escapeRegex(select.value);
+ 
+                    column
+                        .search(val ? '^' + val + '$' : '', true, false)
+                        .draw();
+                });
+ 
+                // Add list of options
+                column
+                    .data()
+                    .unique()
+                    .sort()
+                    .each(function (d, j) {
+                        select.add(new Option(d));
+                    });
+            });
+    }
+});
+
     </script>
     
 
