@@ -138,7 +138,6 @@ require_once "config/database.php";
             $sql = "INSERT INTO productes (Nom_del_producte, Cuantitat, Aula, Armari, Data_registre, Foto) VALUES ('$this->Nom_del_producte', '$this->Cuantitat', '$this->Aula', '$this->Armari', '$this->Data_registre','$this->Foto')";
             $result = mysqli_query($connexio, $sql);
             return $result;
-            
         }
         public function modificar(){
             $connexio = database::connectar();
