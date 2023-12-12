@@ -139,12 +139,17 @@ require_once "config/database.php";
             $result = mysqli_query($connexio, $sql);
             return $result;
         }
-        public function modificar(){
+        public function modificar()
+        {
             $connexio = database::connectar();
-            $sql = "UPDATE productes SET Nom_del_producte = '$this->Nom_del_producte', Cuantitat = '$this->Cuantitat', Aula = '$this->Aula', Armari = '$this->Armari', Data_registre = '$this->Data_registre', Foto = '$this->Foto' WHERE Nom_del_producte = '$this->Nom_del_producte'";
-            $result = mysqli_query($connexio, $sql);
+            $sql = "UPDATE productes SET Nom_del_producte = ?, Cuantitat = ?, Aula = ?, Armari = ?, Data_registre = ?, Foto = ? WHERE Nom_del_producte = ?";
+            $stmt = $connexio->prepare($sql);
+            $stmt->bind_param("sssssss", $this->Nom_del_producte, $this->Cuantitat, $this->Aula, $this->Armari, $this->Data_registre, $this->Foto, $this->Nom_del_producte);
+            $result = $stmt->execute();
+            $stmt->close();
             return $result;
         }
+        
         /*public function eliminar(){
             $connexio = database::connectar();
             $sql = "DELETE FROM usuaris WHERE id = {$this->id};";
@@ -157,8 +162,6 @@ require_once "config/database.php";
             $result = mysqli_query($connexio, $sql);
             return $result->fetch_assoc();
         }
-
-        
 
     }
     ?>
