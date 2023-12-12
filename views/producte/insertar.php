@@ -30,7 +30,6 @@
             border-radius: 10px; /* Esquinas redondeadas */
             padding: 20px; /* Espaciado interno */
         }
-
         .titulo {
             text-align: center; /* Centrar el texto */
             font-size: 24px; /* Tamaño del texto */
@@ -103,11 +102,7 @@
             <input class="form-control" type="date" name="Data_registre" id="Data_registre" required>
 
             <label for="Foto">Foto</label>
-            <input class="form-control" type="text" name="Foto" id="Foto" required>
-
-           
-
-
+            <input class="form-control" type="text" name="Foto" id="Foto" value=$nombre_archivo  required>
 
             <!-- Cambiado el color del botón a azul -->
             <br><input class="btn btn-primary" type="submit" value="Insertar">
