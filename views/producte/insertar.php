@@ -102,6 +102,9 @@
             <label for="Data_registre">Data_registre</label>
             <input class="form-control" type="date" name="Data_registre" id="Data_registre" required>
 
+            <label for="Foto">Foto</label>
+            <input class="form-control" type="text" name="Foto" id="Foto" required>
+
            
 
 
