@@ -139,16 +139,16 @@ require_once "config/database.php";
             $result = mysqli_query($connexio, $sql);
             return $result;
         }
-        public function modificar()
-        {
-            $connexio = database::connectar();
-            $sql = "UPDATE productes SET Nom_del_producte = ?, Cuantitat = ?, Aula = ?, Armari = ?, Data_registre = ?, Foto = ? WHERE Nom_del_producte = ?";
-            $stmt = $connexio->prepare($sql);
-            $stmt->bind_param("ssssss", $this->Nom_del_producte, $this->Cuantitat, $this->Aula, $this->Armari, $this->Data_registre, $this->Foto);
-            $result = $stmt->execute();
-            $stmt->close();
-            return $result;
-        }
+        public function modificar() {
+                $connexio = database::connectar();
+                $sql = "UPDATE productes SET Cuantitat = ?, Aula = ?, Armari = ?, Data_registre = ?, Foto = ? WHERE Nom_del_producte = ?";
+                $stmt = $connexio->prepare($sql);
+                $stmt->bind_param("ssssss", $this->Cuantitat, $this->Aula, $this->Armari, $this->Data_registre, $this->Foto, $this->Nom_del_producte);
+                $result = $stmt->execute();
+                $stmt->close();
+                return $result;
+            }
+            
         
         /*public function eliminar(){
             $connexio = database::connectar();

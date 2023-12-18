@@ -17,7 +17,7 @@ class producteController {
         $producte = new producte();
         $producte->setNom_del_producte($_GET["mostrarPoducte_id"]);
         $row = $producte->mostrarPoducte();
-        require_once "views/producte/insertar.php";
+        require_once "views/producte/actualizar.php";
     }
 
     public function crear() {
