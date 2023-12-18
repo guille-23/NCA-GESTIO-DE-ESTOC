@@ -144,7 +144,7 @@ require_once "config/database.php";
             $connexio = database::connectar();
             $sql = "UPDATE productes SET Nom_del_producte = ?, Cuantitat = ?, Aula = ?, Armari = ?, Data_registre = ?, Foto = ? WHERE Nom_del_producte = ?";
             $stmt = $connexio->prepare($sql);
-            $stmt->bind_param("sssssss", $this->Nom_del_producte, $this->Cuantitat, $this->Aula, $this->Armari, $this->Data_registre, $this->Foto, $this->Nom_del_producte);
+            $stmt->bind_param("ssssss", $this->Nom_del_producte, $this->Cuantitat, $this->Aula, $this->Armari, $this->Data_registre, $this->Foto);
             $result = $stmt->execute();
             $stmt->close();
             return $result;
@@ -156,12 +156,18 @@ require_once "config/database.php";
             $result = mysqli_query($connexio, $sql);
             return $result;
         }*/
-        public function mostrarPoducte(){
-            $connexio = database::connectar();
-            $sql = "SELECT * FROM productes WHERE Nom_del_producte = {$this->Nom_del_producte};";
-            $result = mysqli_query($connexio, $sql);
-            return $result->fetch_assoc();
-        }
+        public function mostrarPoducte() {
+                $connexio = database::connectar();
+                $sql = "SELECT * FROM productes WHERE Nom_del_producte = ?";
+                $stmt = $connexio->prepare($sql);
+                $stmt->bind_param("s", $this->Nom_del_producte);
+                $stmt->execute();
+                $result = $stmt->get_result();
+                $row = $result->fetch_assoc();
+                $stmt->close();
+                return $row;
+            }
+            
 
     }
     ?>
