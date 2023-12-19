@@ -8,6 +8,7 @@ require_once "config/database.php";
         public $Armari;
         public $Data_registre;
         public $Foto;
+        public $Archibat;
 
 
        
@@ -126,13 +127,36 @@ require_once "config/database.php";
 
                 return $this;
         }
-    
-        public function mostrar(){
-            $connexio = database::connectar();
-            $sql = "SELECT * FROM productes";
-            $result = mysqli_query($connexio, $sql);
-            return $result;
+
+         /**
+         * Get the value of Archibat
+         */ 
+        public function getArchibat()
+        {
+                return $this->Archibat;
         }
+
+        /**
+         * Set the value of Archibat
+         *
+         * @return  self
+         */ 
+        public function setArchibat($Archibat)
+        {
+                $this->Archibat = $Archibat;
+
+                return $this;
+        }
+
+
+    
+        public function mostrar() {
+                $connexio = database::connectar();
+                $sql = "SELECT * FROM productes";
+                $result = mysqli_query($connexio, $sql);
+                return $result;
+            }
+            
         public function insertar(){
             $connexio = database::connectar();
             $sql = "INSERT INTO productes (Nom_del_producte, Cuantitat, Aula, Armari, Data_registre, Foto) VALUES ('$this->Nom_del_producte', '$this->Cuantitat', '$this->Aula', '$this->Armari', '$this->Data_registre','$this->Foto')";
@@ -167,51 +191,22 @@ require_once "config/database.php";
                 $stmt->close();
                 return $row;
             }
-            
+       
 
-
-            public function arxivarProducto() {
-                // Paso 1: Guardar los datos del producto
-                $productoGuardado = $this->guardarDatosDelProducto();
-            
-                // Paso 2: Eliminar de la tabla "productes"
-                $this->eliminarDeProductes();
-            
-                // Paso 3: Insertar en la tabla "arxivar_productes"
-                $this->insertarEnArxivar($productoGuardado);
-            }
-            
-            private function guardarDatosDelProducto() {
-                // Crear un array con los datos del producto
-                $productoGuardado = array(
-                    'Cuantitat' => $this->Cuantitat,
-                    'Aula' => $this->Aula,
-                    'Armari' => $this->Armari,
-                    'Data_registre' => $this->Data_registre,
-                    'Foto' => $this->Foto,
-                    'Nom_del_producte' => $this->Nom_del_producte
-                );
-            
-                return $productoGuardado;
-            }
-            
-            private function eliminarDeProductes() {
+            public function archivar($mostrarPoducte_id) {
                 $connexio = database::connectar();
-                $sql = "DELETE FROM productes WHERE Nom_del_producte = ?";
+                
+                // Actualizar el valor de Archibat a 1 para el producto seleccionado
+                $sql = "UPDATE productes SET Archibat = 1 WHERE Nom_del_producte = ?";
                 $stmt = $connexio->prepare($sql);
-                $stmt->bind_param("s", $this->Nom_del_producte);
-                $stmt->execute();
+                $stmt->bind_param("s", $mostrarPoducte_id);
+                $result = $stmt->execute();
                 $stmt->close();
+                
+                // Devuelve true si la actualización fue exitosa, de lo contrario, false
+                return $result;
             }
             
-            private function insertarEnArxivar($productoGuardado) {
-                $connexio = database::connectar();
-                $sql = "INSERT INTO arxivar_productes (Cuantitat, Aula, Armari, Data_registre, Foto, Nom_del_producte) VALUES (?, ?, ?, ?, ?, ?)";
-                $stmt = $connexio->prepare($sql);
-                $stmt->bind_param("ssssss", $productoGuardado['Cuantitat'], $productoGuardado['Aula'], $productoGuardado['Armari'], $productoGuardado['Data_registre'], $productoGuardado['Foto'], $productoGuardado['Nom_del_producte']);
-                $stmt->execute();
-                $stmt->close();
-            }
             
 
     }

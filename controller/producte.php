@@ -45,14 +45,25 @@ class producteController {
         $producte->modificar();
         header("Location:index.php?controller=producte&action=mostrartot");
     }
+    public function archivarProducto() {
+        $producte = new producte();
+        $productes = $producte->mostrar();
+        require_once "views/producte/archivarProducto.php";
+    }
     
-/*
-    public function EsborrarUsuari(){
-        $id = $_GET["user_id"];
-        $usuari = new usuari();
-        $usuari->setId($id);
-        $usuari->eliminar();
-        header("Location: index.php?controller=usuari&action=mostrartot");
-    }*/
+    public function archivar($mostrarPoducte_id) {
+        $producte = new producte();
+        $result = $producte->archivar($mostrarPoducte_id);
+        
+        // Puedes enviar una respuesta al cliente si es necesario
+        if ($result) {
+            echo "Producto archivado correctamente";
+        } else {
+            echo "Error al archivar el producto";
+        }
+    }
+    
+    
+    
 }
 ?>
