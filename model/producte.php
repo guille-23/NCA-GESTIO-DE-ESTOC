@@ -169,5 +169,50 @@ require_once "config/database.php";
             }
             
 
+
+            public function arxivarProducto() {
+                // Paso 1: Guardar los datos del producto
+                $productoGuardado = $this->guardarDatosDelProducto();
+            
+                // Paso 2: Eliminar de la tabla "productes"
+                $this->eliminarDeProductes();
+            
+                // Paso 3: Insertar en la tabla "arxivar_productes"
+                $this->insertarEnArxivar($productoGuardado);
+            }
+            
+            private function guardarDatosDelProducto() {
+                // Crear un array con los datos del producto
+                $productoGuardado = array(
+                    'Cuantitat' => $this->Cuantitat,
+                    'Aula' => $this->Aula,
+                    'Armari' => $this->Armari,
+                    'Data_registre' => $this->Data_registre,
+                    'Foto' => $this->Foto,
+                    'Nom_del_producte' => $this->Nom_del_producte
+                );
+            
+                return $productoGuardado;
+            }
+            
+            private function eliminarDeProductes() {
+                $connexio = database::connectar();
+                $sql = "DELETE FROM productes WHERE Nom_del_producte = ?";
+                $stmt = $connexio->prepare($sql);
+                $stmt->bind_param("s", $this->Nom_del_producte);
+                $stmt->execute();
+                $stmt->close();
+            }
+            
+            private function insertarEnArxivar($productoGuardado) {
+                $connexio = database::connectar();
+                $sql = "INSERT INTO arxivar_productes (Cuantitat, Aula, Armari, Data_registre, Foto, Nom_del_producte) VALUES (?, ?, ?, ?, ?, ?)";
+                $stmt = $connexio->prepare($sql);
+                $stmt->bind_param("ssssss", $productoGuardado['Cuantitat'], $productoGuardado['Aula'], $productoGuardado['Armari'], $productoGuardado['Data_registre'], $productoGuardado['Foto'], $productoGuardado['Nom_del_producte']);
+                $stmt->execute();
+                $stmt->close();
+            }
+            
+
     }
     ?>
