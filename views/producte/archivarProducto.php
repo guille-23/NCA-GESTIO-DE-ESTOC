@@ -20,7 +20,7 @@
 </head>
 
 <body>
-    <table class="table" id="myTable">
+    <table class="table" id="newTable">
         <thead>
             <tr>
                 <th>Nom_del_producte</th>
@@ -70,7 +70,7 @@ while ($row = $productes->fetch_assoc()) {
     </table>
 
     <script>
-        new DataTable('#myTable', {
+        new DataTable('#newTable', {
             initComplete: function() {
                 this.api()
                     .columns()
