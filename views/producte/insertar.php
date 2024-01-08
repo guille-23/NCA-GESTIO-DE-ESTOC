@@ -108,13 +108,14 @@
             <input class="form-control" type="date" name="Data_registre" id="Data_registre" required>
 
             <label for="Foto">Foto</label>
-            <input  name="Foto" id="Foto" value=$nombre_archivo  required>
+            <input class="form-control" type="file" name="Foto" id="Foto" value=$nombre_archivo  required>
 
 
             
 
             <!-- Cambiado el color del botón a azul -->
             <br><input class="btn btn-primary" type="submit" value="Insertar">
+            
         </form>
     </div>
     <script src="camara.php"></script>

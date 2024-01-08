@@ -51,8 +51,22 @@ while ($row = $productes->fetch_assoc()) {
         echo '<td><a class="btn btn-warning" href="index.php?controller=producte&action=actualitzar&mostrarPoducte_id=' . $row["Nom_del_producte"] . '" role="button">Actualizar</a></td>';
         echo '<td><a class="btn btn-danger" href="index.php?controller=producte&action=archivarProducto&mostrarPoducte_id=' . $row["Nom_del_producte"] . '" role="button">Archivar</a></td>';
         echo "</tr>";
+        if (isset($_GET['action']) && $_GET['action'] == 'archivarProducto') {
+            // Asegúrate de validar y limpiar la entrada para evitar inyección de SQL
+            $producto_id = mysqli_real_escape_string($tu_conexion, $_GET['mostrarPoducte_id']);
+        
+            // Actualizar el valor de Archibat a 0
+            $sql = "UPDATE productos SET Archibat = 0 WHERE Nom_del_producte = '$producto_id'";
+        
+            if ($tu_conexion->query($sql) === TRUE) {
+                echo "Producto archivado correctamente";
+            } else {
+                echo "Error al archivar el producto: " . $tu_conexion->error;
+            }
+        }
     }
 }
+
 ?>
         </tbody>
         <tfoot>
@@ -106,6 +120,7 @@ while ($row = $productes->fetch_assoc()) {
     </script>
 
     <br><a class="btn btn-primary btn-lg active" href="index.php?controller=producte&action=insertar">Insertar</a></button>
+    
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.6.0/dist/umd/popper.min.js" integrity="sha384-KsvD1yqQ1/1+IA7gi3P0tyJcT3vR+NdBTt13hSJ2lnve8agRGXTTyNaBYmCR/Nwi" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.min.js" integrity="sha384-nsg8ua9HAw1y0W1btsyWgBklPnCUAFLuTMS2G72MMONqmOymq585AcH49TLBQObG" crossorigin="anonymous"></script>
 </body>
