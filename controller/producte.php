@@ -28,7 +28,7 @@ class producteController {
         $producte->setArmari($_POST["Armari"]);
         $producte->setData_registre($_POST["Data_registre"]);
         $producte->setFoto($_POST["Foto"]);
-
+        $producte->setArchibat($_POST["Archibat"]);
         $producte->insertar();
         header("Location:index.php?controller=producte&action=mostrartot");
     }
@@ -42,6 +42,7 @@ class producteController {
         $producte->setArmari($_POST["Armari"]);
         $producte->setData_registre($_POST["Data_registre"]);
         $producte->setFoto($_POST["Foto"]);
+        $producte->setArchibat($_POST["Archibat"]);
         $producte->modificar();
         header("Location:index.php?controller=producte&action=mostrartot");
     }
@@ -54,7 +55,6 @@ class producteController {
     public function archivar($mostrarPoducte_id) {
         $producte = new producte();
         $result = $producte->archivar($mostrarPoducte_id);
-        
         // Puedes enviar una respuesta al cliente si es necesario
         if ($result) {
             echo "Producto archivado correctamente";
@@ -62,8 +62,6 @@ class producteController {
             echo "Error al archivar el producto";
         }
     }
-    
-    
     
 }
 ?>

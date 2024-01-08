@@ -60,6 +60,9 @@
                 echo '<label for="fecha">Fecha:</label>';
                 echo '<input class="form-control" type="date" name="Data_registre" id="Data_registre" value="' . $row['Data_registre'] . '" required>';
 
+                echo '<label for="Archibat">Archibat:</label>';
+                echo '<input class="form-control" type="int" name="Archibat" id="Archibat" value="' . $row['Archibat'] . '" required>';
+
                 echo '<br><br><input class="btn btn-primary" type="submit" value="Actualitzar">';
             
             ?>

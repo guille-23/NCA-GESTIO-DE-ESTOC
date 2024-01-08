@@ -46,6 +46,7 @@ while ($row = $productes->fetch_assoc()) {
         echo "<td>" . $row["Armari"] . "</td>";
         echo "<td>" . $row["Data_registre"] . "</td>";
         echo "<td><img src='image/" . $row["Foto"] . "' width='100' height='100'></td>";
+        echo "<td>" . $row["Archibat"] . "</td>";
 
         echo '<td><a class="btn btn-warning" href="index.php?controller=producte&action=actualitzar&mostrarPoducte_id=' . $row["Nom_del_producte"] . '" role="button">Actualizar</a></td>';
         echo '<td><a class="btn btn-danger" href="index.php?controller=producte&action=archivarProducto&mostrarPoducte_id=' . $row["Nom_del_producte"] . '" role="button">Archivar</a></td>';

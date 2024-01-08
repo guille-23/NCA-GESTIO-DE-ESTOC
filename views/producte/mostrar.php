@@ -30,8 +30,9 @@
                 <th>Data_registre</th>
                 <th>Foto</th>
                 <th>Archibat</th>
-                <th>Actualizar</th>
                 <th>Archivar</th>
+                <th>Actualizar</th>
+                
             </tr>
         </thead>
         <tbody>
@@ -51,19 +52,7 @@ while ($row = $productes->fetch_assoc()) {
         echo '<td><a class="btn btn-warning" href="index.php?controller=producte&action=actualitzar&mostrarPoducte_id=' . $row["Nom_del_producte"] . '" role="button">Actualizar</a></td>';
         echo '<td><a class="btn btn-danger" href="index.php?controller=producte&action=archivarProducto&mostrarPoducte_id=' . $row["Nom_del_producte"] . '" role="button">Archivar</a></td>';
         echo "</tr>";
-        if (isset($_GET['action']) && $_GET['action'] == 'archivarProducto') {
-            // Asegúrate de validar y limpiar la entrada para evitar inyección de SQL
-            $producto_id = mysqli_real_escape_string($tu_conexion, $_GET['mostrarPoducte_id']);
         
-            // Actualizar el valor de Archibat a 0
-            $sql = "UPDATE productos SET Archibat = 0 WHERE Nom_del_producte = '$producto_id'";
-        
-            if ($tu_conexion->query($sql) === TRUE) {
-                echo "Producto archivado correctamente";
-            } else {
-                echo "Error al archivar el producto: " . $tu_conexion->error;
-            }
-        }
     }
 }
 
@@ -78,8 +67,9 @@ while ($row = $productes->fetch_assoc()) {
                 <th>Data_registre</th>
                 <th>Foto</th>
                 <th>Archibat</th>
-                <th>Actualizar</th>
                 <th>Archivar</th>
+                <th>Actualizar</th>
+                
             </tr>
         </tfoot>
     </table>

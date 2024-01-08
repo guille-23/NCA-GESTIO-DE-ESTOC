@@ -159,19 +159,20 @@ require_once "config/database.php";
             
         public function insertar(){
             $connexio = database::connectar();
-            $sql = "INSERT INTO productes (Nom_del_producte, Cuantitat, Aula, Armari, Data_registre, Foto) VALUES ('$this->Nom_del_producte', '$this->Cuantitat', '$this->Aula', '$this->Armari', '$this->Data_registre','$this->Foto')";
+            $sql = "INSERT INTO productes (Nom_del_producte, Cuantitat, Aula, Armari, Data_registre, Foto, Archibat) VALUES ('$this->Nom_del_producte', '$this->Cuantitat', '$this->Aula', '$this->Armari', '$this->Data_registre','$this->Foto',,'$this->Archibat')";
             $result = mysqli_query($connexio, $sql);
             return $result;
         }
         public function modificar() {
                 $connexio = database::connectar();
-                $sql = "UPDATE productes SET Cuantitat = ?, Aula = ?, Armari = ?, Data_registre = ?, Foto = ? WHERE Nom_del_producte = ?";
+                $sql = "UPDATE productes SET Cuantitat = ?, Aula = ?, Armari = ?, Data_registre = ?, Foto = ?, Archibat = ? WHERE Nom_del_producte = ?";
                 $stmt = $connexio->prepare($sql);
-                $stmt->bind_param("ssssss", $this->Cuantitat, $this->Aula, $this->Armari, $this->Data_registre, $this->Foto, $this->Nom_del_producte);
+                $stmt->bind_param("sssssss", $this->Cuantitat, $this->Aula, $this->Armari, $this->Data_registre, $this->Foto, $this->Archibat, $this->Nom_del_producte);
                 $result = $stmt->execute();
                 $stmt->close();
                 return $result;
             }
+            
             
         
         /*public function eliminar(){
