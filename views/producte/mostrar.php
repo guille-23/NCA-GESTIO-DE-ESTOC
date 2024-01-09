@@ -20,7 +20,7 @@
 </head>
 
 <body>
-    <table class="table" id="myTable">
+    <table class="table" id="myTable" class="table table-bordered">
         <thead>
             <tr>
                 <th>Nom_del_producte</th>
@@ -67,11 +67,6 @@ while ($row = $productes->fetch_assoc()) {
                 <th>Aula</th>
                 <th>Armari</th>
                 <th>Data_registre</th>
-                <th>Foto</th>
-                <th>Archibat</th>
-                <th>Archivar</th>
-                <th>Actualizar</th>
-                
             </tr>
         </tfoot>
     </table>
@@ -112,7 +107,6 @@ while ($row = $productes->fetch_assoc()) {
     </script>
 
     <br><a class="btn btn-primary btn-lg active" href="index.php?controller=producte&action=insertar">Insertar</a></button>
-    
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.6.0/dist/umd/popper.min.js" integrity="sha384-KsvD1yqQ1/1+IA7gi3P0tyJcT3vR+NdBTt13hSJ2lnve8agRGXTTyNaBYmCR/Nwi" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.min.js" integrity="sha384-nsg8ua9HAw1y0W1btsyWgBklPnCUAFLuTMS2G72MMONqmOymq585AcH49TLBQObG" crossorigin="anonymous"></script>
 </body>

@@ -63,8 +63,6 @@ while ($row = $productes->fetch_assoc()) {
                 <th>Aula</th>
                 <th>Armari</th>
                 <th>Data_registre</th>
-                <th>Foto</th>
-                <th>Archibat</th>
                 
             </tr>
         </tfoot>

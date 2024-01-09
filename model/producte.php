@@ -173,20 +173,20 @@ require_once "config/database.php";
 
     
         public function mostrar() {
-                $connexio = database::connectar();
+                $connexio = database::conectar();
                 $sql = "SELECT * FROM productes";
                 $result = mysqli_query($connexio, $sql);
                 return $result;
             }
             
         public function insertar(){
-            $connexio = database::connectar();
+            $connexio = database::conectar();
             $sql = "INSERT INTO productes (Nom_del_producte, Cuantitat, Aula, Armari, Data_registre, Foto, Archibat, Prestat) VALUES ('$this->Nom_del_producte', '$this->Cuantitat', '$this->Aula', '$this->Armari', '$this->Data_registre','$this->Foto','$this->Archibat','$this->Prestat')";
             $result = mysqli_query($connexio, $sql);
             return $result;
         }
         public function modificar() {
-                $connexio = database::connectar();
+                $connexio = database::conectar();
                 $sql = "UPDATE productes SET Cuantitat = ?, Aula = ?, Armari = ?, Data_registre = ?, Foto = ?, Archibat = ?, Prestat = ? WHERE Nom_del_producte = ?";
                 $stmt = $connexio->prepare($sql);
                 $stmt->bind_param("ssssssss", $this->Cuantitat, $this->Aula, $this->Armari, $this->Data_registre, $this->Foto, $this->Archibat, $this->Prestat, $this->Nom_del_producte);                $result = $stmt->execute();
@@ -203,7 +203,7 @@ require_once "config/database.php";
             return $result;
         }*/
         public function mostrarPoducte() {
-                $connexio = database::connectar();
+                $connexio = database::conectar();
                 $sql = "SELECT * FROM productes WHERE Nom_del_producte = ?";
                 $stmt = $connexio->prepare($sql);
                 $stmt->bind_param("s", $this->Nom_del_producte);
@@ -216,7 +216,7 @@ require_once "config/database.php";
        
 
             public function archivar($mostrarPoducte_id) {
-                $connexio = database::connectar();
+                $connexio = database::conectar();
                 
                 // Actualizar el valor de Archibat a 1 para el producto seleccionado
                 $sql = "UPDATE productes SET Archibat = 1 WHERE Nom_del_producte = ?";
