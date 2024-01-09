@@ -29,6 +29,7 @@ class producteController {
         $producte->setData_registre($_POST["Data_registre"]);
         $producte->setFoto($_POST["Foto"]);
         $producte->setArchibat($_POST["Archibat"]);
+        $producte->setPrestat($_POST["Prestat"]);
         $producte->insertar();
         header("Location:index.php?controller=producte&action=mostrartot");
     }
@@ -43,6 +44,7 @@ class producteController {
         $producte->setData_registre($_POST["Data_registre"]);
         $producte->setFoto($_POST["Foto"]);
         $producte->setArchibat($_POST["Archibat"]);
+        $producte->setPrestat($_POST["Prestat"]);
         $producte->modificar();
         header("Location:index.php?controller=producte&action=mostrartot");
     }
@@ -52,6 +54,12 @@ class producteController {
         require_once "views/producte/archivarProducto.php";
     }
     
+    public function Prestat() {
+        $producte = new producte();
+        $productes = $producte->mostrar();
+        require_once "views/producte/Prestat.php";
+    }
+
     public function archivar($mostrarPoducte_id) {
         $producte = new producte();
         $result = $producte->archivar($mostrarPoducte_id);

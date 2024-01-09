@@ -71,7 +71,6 @@
 
         echo $_GET["controller"] .  " no existeix el controlador";
     }
-
     ?>
     </script>
 </body>

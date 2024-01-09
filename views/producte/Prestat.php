@@ -30,9 +30,6 @@
                 <th>Data_registre</th>
                 <th>Foto</th>
                 <th>Archibat</th>
-                <th>Actualizar</th>
-                <th>Archibar</th>
-                <th>Prestat</th>
                 
             </tr>
         </thead>
@@ -40,7 +37,7 @@
         <?php
 while ($row = $productes->fetch_assoc()) {
     // Verifica si el producto no está archivado (archivat = 0)
-    if ($row["Archibat"] == 0 && $row["Prestat"] == 0) {
+    if ($row["Prestat"] == 1) {
         echo "<tr>";
         echo "<td>" . $row["Nom_del_producte"] . "</td>";
         echo "<td>" . $row["Cuantitat"] . "</td>";
@@ -52,7 +49,6 @@ while ($row = $productes->fetch_assoc()) {
 
         echo '<td><a class="btn btn-warning" href="index.php?controller=producte&action=actualitzar&mostrarPoducte_id=' . $row["Nom_del_producte"] . '" role="button">Actualizar</a></td>';
         echo '<td><a class="btn btn-danger" href="index.php?controller=producte&action=archivarProducto&mostrarPoducte_id=' . $row["Nom_del_producte"] . '" role="button">Archivar</a></td>';
-        echo '<td><a class="btn btn-warning" href="index.php?controller=producte&action=Prestat&mostrarPoducte_id=' . $row["Nom_del_producte"] . '" role="button">Prestat</a></td>';
         echo "</tr>";
         
     }
@@ -69,8 +65,6 @@ while ($row = $productes->fetch_assoc()) {
                 <th>Data_registre</th>
                 <th>Foto</th>
                 <th>Archibat</th>
-                <th>Archivar</th>
-                <th>Actualizar</th>
                 
             </tr>
         </tfoot>

@@ -9,6 +9,7 @@ require_once "config/database.php";
         public $Data_registre;
         public $Foto;
         public $Archibat;
+        public $Prestat;
 
 
        
@@ -148,6 +149,27 @@ require_once "config/database.php";
                 return $this;
         }
 
+        
+        /**
+         * Get the value of Prestat
+         */ 
+        public function getPrestat()
+        {
+                return $this->Prestat;
+        }
+
+        /**
+         * Set the value of Prestat
+         *
+         * @return  self
+         */ 
+        public function setPrestat($Prestat)
+        {
+                $this->Prestat = $Prestat;
+
+                return $this;
+        }
+
 
     
         public function mostrar() {
@@ -159,16 +181,15 @@ require_once "config/database.php";
             
         public function insertar(){
             $connexio = database::connectar();
-            $sql = "INSERT INTO productes (Nom_del_producte, Cuantitat, Aula, Armari, Data_registre, Foto, Archibat) VALUES ('$this->Nom_del_producte', '$this->Cuantitat', '$this->Aula', '$this->Armari', '$this->Data_registre','$this->Foto',,'$this->Archibat')";
+            $sql = "INSERT INTO productes (Nom_del_producte, Cuantitat, Aula, Armari, Data_registre, Foto, Archibat, Prestat) VALUES ('$this->Nom_del_producte', '$this->Cuantitat', '$this->Aula', '$this->Armari', '$this->Data_registre','$this->Foto','$this->Archibat','$this->Prestat')";
             $result = mysqli_query($connexio, $sql);
             return $result;
         }
         public function modificar() {
                 $connexio = database::connectar();
-                $sql = "UPDATE productes SET Cuantitat = ?, Aula = ?, Armari = ?, Data_registre = ?, Foto = ?, Archibat = ? WHERE Nom_del_producte = ?";
+                $sql = "UPDATE productes SET Cuantitat = ?, Aula = ?, Armari = ?, Data_registre = ?, Foto = ?, Archibat = ?, Prestat = ? WHERE Nom_del_producte = ?";
                 $stmt = $connexio->prepare($sql);
-                $stmt->bind_param("sssssss", $this->Cuantitat, $this->Aula, $this->Armari, $this->Data_registre, $this->Foto, $this->Archibat, $this->Nom_del_producte);
-                $result = $stmt->execute();
+                $stmt->bind_param("ssssssss", $this->Cuantitat, $this->Aula, $this->Armari, $this->Data_registre, $this->Foto, $this->Archibat, $this->Prestat, $this->Nom_del_producte);                $result = $stmt->execute();
                 $stmt->close();
                 return $result;
             }
@@ -206,9 +227,7 @@ require_once "config/database.php";
                 
                 // Devuelve true si la actualización fue exitosa, de lo contrario, false
                 return $result;
-            }
-            
-            
+            }            
 
     }
     ?>

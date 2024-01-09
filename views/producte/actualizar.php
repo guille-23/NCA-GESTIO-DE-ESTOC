@@ -63,6 +63,9 @@
                 echo '<label for="Archibat">Archibat:</label>';
                 echo '<input class="form-control" type="int" name="Archibat" id="Archibat" value="' . $row['Archibat'] . '" required>';
 
+                echo '<label for="Prestat">Prestat:</label>';
+                echo '<input class="form-control" type="int" name="Prestat" id="Prestat" value="' . $row['Prestat'] . '" required>';
+
                 echo '<br><br><input class="btn btn-primary" type="submit" value="Actualitzar">';
             
             ?>
